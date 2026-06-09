@@ -1,10 +1,12 @@
-from google import genai
 from dotenv import load_dotenv
+from huggingface_hub import whoami
 import os
 
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
-for model in client.models.list():
-    print(model.name)
+print("Token loaded:", token is not None)
+print("First chars:", token[:10] if token else None)
+
+print(whoami(token=token))
